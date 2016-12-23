@@ -7,8 +7,8 @@
     <artifactId>liyun-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>lyqc-mail</artifactId>
-  <name>lyqc-mail</name>
+  <artifactId>liyun-mail</artifactId>
+  <name>liyun-mail</name>
   <url>http://maven.apache.org</url>
 
 
