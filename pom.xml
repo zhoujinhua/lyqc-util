@@ -12,7 +12,7 @@
   	<module>liyun-core</module>
   	<module>liyun-orm</module>
     <module>liyun-ui</module>
-	<module>liyun-mail</module>
+	<module>lyqc-mail</module>
   </modules>
   
   <build>
