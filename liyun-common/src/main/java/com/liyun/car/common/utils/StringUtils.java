@@ -325,4 +325,23 @@ public class StringUtils {
 
 		return false;
 	}
+	
+	/**
+	 * 随机生成用户初始化密码（由小写字母和数字组成的8位字符串）
+	 */
+	public static String mathRandom(int size){
+		StringBuffer array = new StringBuffer();
+		//把0-9，a-z全存到字符串里
+		for(int i=0; i<= size+1;i++){
+			array.append(i);
+		}
+		int length = array.length();
+		StringBuffer str = new StringBuffer("");
+		int n = size;
+		for(int i=0;i<n;i++){
+			char c = array.charAt((int) (Math.random() * length));
+			str.append(c);
+		}
+		return str.toString();
+	}
 }
