@@ -1,9 +1,15 @@
 package com.liyun.car.common.utils;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.liyun.car.common.enums.OperMode;
 
 /**
  * get and set field
@@ -59,6 +65,41 @@ public class BeanInvokeUtils {
 		}
 		return dest;
 	}
+	
+	public static Object cloneObject(Object sour, OperMode mode, String...params){
+		List<String> fieldNames = new ArrayList<>();
+		if(params!=null && params.length!=0){
+			for(String param : params){
+				fieldNames.add(param);
+			}
+		}
+		Object obj = null;
+		try {
+			obj = sour.getClass().newInstance();
+			for(Field field : obj.getClass().getDeclaredFields()){
+				try {
+					field.setAccessible(true);
+					if(mode != null ){
+						if( fieldNames.contains(field.getName()) && mode != OperMode.IN){
+							
+						} else if( fieldNames.contains(field.getName()) && mode == OperMode.IN){
+							field.set(obj, invokeMethod(sour, field.getName()));
+						} else {
+							field.set(obj, invokeMethod(sour, field.getName()));
+						}
+					} else {
+						field.set(obj, invokeMethod(sour, field.getName()));
+					}
+				} catch(Exception e){
+					System.out.println("do nothing...");
+				}
+			}
+		} catch (Exception e1) {
+			System.out.println("can't new instance");
+		}
+		return obj;
+	}
+	
 	public static Object cloneMethodAll(Object sour, Object dest, String...params){
 		List<String> fieldNames = new ArrayList<>();
 		if(params!=null && params.length!=0){
@@ -89,14 +130,25 @@ public class BeanInvokeUtils {
 		Field field = clazz.getDeclaredField(methodName);
 		return field.get(null);
 	}
-	public static void main(String[] args) {
-		/*for(Field field : Dict.class.getDeclaredFields()){
-			System.out.println(field.getName());
-		}*/
-		test("name","code");
-		
+	
+	public static Object deepCopy(Object input) {
+
+	    Object output = null;
+	    try {
+	        // Writes the object
+	        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+	        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+	        objectOutputStream.writeObject(input);
+
+	        // Reads the object
+	        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+	        ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+	        output = objectInputStream.readObject();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return output;
 	}
-	static void test(String...params){
-		System.out.println(params.toString());
-	}
+	
 }

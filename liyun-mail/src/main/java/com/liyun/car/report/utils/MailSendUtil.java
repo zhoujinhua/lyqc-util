@@ -65,11 +65,11 @@ public class MailSendUtil {
 	}
 
 	public static void main(String[] args) throws Exception {
-		List<String> list = new ArrayList<>();
+		List<String> list = new ArrayList<String>();
 		list.add("fei.zhou01@liyunqiche.com");
 		
 		List<Attachment> attachments
-		 = new ArrayList<>();
+		 = new ArrayList<Attachment>();
 		
 		attachments.add(new Attachment(new File("F://test.xlsx")));
 		new MailSendUtil("a", "b", list, null, attachments, "noreply@liyunqiche.com", "Password2").send();

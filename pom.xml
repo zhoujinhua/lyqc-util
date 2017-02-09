@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liyun.util</groupId>
   <artifactId>lyqc-util</artifactId>
-  <version>1.0.0</version>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   	<!-- 整合的模块 -->
